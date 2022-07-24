@@ -1,18 +1,27 @@
+import { useState, useEffect } from "react";
 import CerrarBtn from "../img/cerrar.svg";
 import Mensaje from "./Mensaje";
-import { useState } from "react";
 
 export default function Modal({
   setModal,
   animarModal,
   setAnimarModal,
   guardarGasto,
+  gastoEditar,
 }) {
   const [mensaje, setMensaje] = useState("");
 
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
+
+  useEffect(() => {
+    if (Object.keys(gastoEditar).length > 0) {
+      setNombre(gastoEditar.nombre);
+      setCantidad(gastoEditar.cantidad);
+      setCategoria(gastoEditar.categoria);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
