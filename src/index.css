@@ -145,8 +145,6 @@ header h1 {
   border-left: 5px solid #b91c1c;
   color: #b91c1c;
 }
-.alerta.success {
-}
 
 .contenedor {
   width: 90%;
@@ -207,7 +205,7 @@ header h1 {
 }
 .contenido-presupuesto p.negativo,
 .contenido-presupuesto p.negativo span {
-  color: red;
+  color: #dc2626;
 }
 .contenido-presupuesto span {
   font-weight: 900;

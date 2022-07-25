@@ -8,18 +8,23 @@ export default function Modal({
   setAnimarModal,
   guardarGasto,
   gastoEditar,
+  setGastoEditar,
 }) {
   const [mensaje, setMensaje] = useState("");
 
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [id, setId] = useState("");
 
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
       setNombre(gastoEditar.nombre);
       setCantidad(gastoEditar.cantidad);
       setCategoria(gastoEditar.categoria);
+      setId(gastoEditar.id);
+      setFecha(gastoEditar.fecha);
     }
   }, []);
 
@@ -33,11 +38,12 @@ export default function Modal({
       }, 3000);
       return;
     }
-    guardarGasto({ nombre, cantidad, categoria });
+    guardarGasto({ nombre, cantidad, categoria, id, fecha });
   };
 
   const ocultarModal = () => {
     setAnimarModal(false);
+    setGastoEditar({});
     setTimeout(() => {
       setModal(false);
     }, 500);
@@ -51,7 +57,7 @@ export default function Modal({
         onSubmit={handleSubmit}
         className={`formulario ${animarModal ? "animar" : "cerrar"}`}
       >
-        <legend>Nuevo Gasto</legend>
+        <legend>{gastoEditar.nombre ? "Editar gasto" : "Nuevo Gasto"}</legend>
         {mensaje && <Mensaje tipo={"error"}>{mensaje}</Mensaje>}
 
         <div className="campo">
@@ -94,7 +100,10 @@ export default function Modal({
             <option value="suscripciones">Suscripciones</option>
           </select>
 
-          <input type="submit" value="Añadir Gasto" />
+          <input
+            type="submit"
+            value={gastoEditar.nombre ? "Guardar cambios" : "Añadir Gasto"}
+          />
         </div>
       </form>
     </div>
